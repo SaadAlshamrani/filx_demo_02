@@ -18,18 +18,18 @@ class NewPlayingViewController: UIViewController {
         let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
         let task = session.dataTask(with: request) { (data,response, error) in
         
-         //This will run when the network request returns
+            // // This will run when the network request returns
             if let error = error {
                 print(error.localizedDescription)
-            } else if let data = data{
-                let dataDcictionary = try! JSONSerialization.jsonObject(with: data,options: []) as! [String: Any]
-                print(dataDcictionary)
-                let movies = detaDictionary["results"] as! [[String; Any]]
+            } else if let data = data {
+                let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
+                //print(dataDcictionary)
+                let movies = dataDictionary["results"] as! [[String: Any]]
                 for movie in movies{
-                ["title"] as! Srting
-               print(title)
-            }
-    
+                let title = movie["title"] as! String
+                    print(title)
+                }
+                }
           }
         task.resume()
         
